@@ -1,7 +1,7 @@
 plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("io.micronaut.application") version "3.3.2"
-    id("com.microsoft.azure.azurefunctions") version "1.8.2"
+//    id("com.microsoft.azure.azurefunctions") version "1.8.2"
 }
 
 version = "0.1"
@@ -41,8 +41,8 @@ java {
 
 graalvmNative.toolchainDetection = false
 micronaut {
-//    runtime("netty")
-    runtime("azure_function")
+    runtime("netty")
+//    runtime("azure_function")
 
     testRuntime("junit5")
     processing {

@@ -1,32 +1,39 @@
 package com.example;
 
-import com.microsoft.azure.functions.HttpStatus;
-import io.micronaut.azure.function.http.HttpRequestMessageBuilder;
-import io.micronaut.http.HttpMethod;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import io.micronaut.http.HttpRequest;
+import io.micronaut.http.client.HttpClient;
+import io.micronaut.http.client.annotation.Client;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import jakarta.inject.Inject;
 
-class MonoTest {
-    private final Function function = new Function();
+
+@MicronautTest
+public class MonoTest {
+    @Inject
+    @Client("/")
+    HttpClient client;
 
     @Test
-    void testBlock() {
-        HttpRequestMessageBuilder.AzureHttpResponseMessage response =
-                function.request(HttpMethod.GET, "/google/block").invoke();
+    public void testMono() {
+        HttpRequest<String> request = HttpRequest.GET("/google/mono");
+        String body = client.toBlocking().retrieve(request);
 
-        assertEquals(HttpStatus.OK, response.getStatus());
-        String body = response.getBodyAsString();
         assertNotNull(body);
+        Assertions.assertTrue(body.contains("Google"));
     }
 
     @Test
-    void testMono() {
-        HttpRequestMessageBuilder.AzureHttpResponseMessage response =
-                function.request(HttpMethod.GET, "/google/mono").invoke();
+    public void testBlock() {
+        HttpRequest<String> request = HttpRequest.GET("/google/block");
+        String body = client.toBlocking().retrieve(request);
 
-        assertEquals(HttpStatus.OK, response.getStatus());
-        String body = response.getBodyAsString();
         assertNotNull(body);
+        Assertions.assertTrue(body.contains("Google"));
     }
 }
+
