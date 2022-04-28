@@ -1,6 +1,12 @@
 micronaut:
   application:
     name: demo
+
+
+  http:
+    client:
+      read-timeout: 300
+
 netty:
   default:
     allocator:
