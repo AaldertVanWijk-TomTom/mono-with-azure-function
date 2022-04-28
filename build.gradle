@@ -1,7 +1,5 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "7.1.2"
     id("io.micronaut.application") version "3.3.2"
-    id("com.microsoft.azure.azurefunctions") version "1.8.2"
 }
 
 version = "0.1"
@@ -12,22 +10,11 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor("org.projectlombok:lombok")
-    annotationProcessor("io.micronaut:micronaut-http-validation")
-    implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     implementation("io.micronaut:micronaut-runtime")
-    implementation("jakarta.annotation:jakarta.annotation-api")
-    compileOnly("org.projectlombok:lombok")
-    runtimeOnly("ch.qos.logback:logback-classic")
-    implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut.reactor:micronaut-reactor")
+    implementation("io.micronaut.reactor:micronaut-reactor-http-client")
 
-    implementation("io.micronaut:micronaut-jackson-databind")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-    implementation("io.micronaut.xml:micronaut-jackson-xml")
-
-
-
+    runtimeOnly("ch.qos.logback:logback-classic")
 }
 
 
@@ -42,8 +29,6 @@ java {
 graalvmNative.toolchainDetection = false
 micronaut {
     runtime("netty")
-//    runtime("jetty")
-//    runtime("azure_function")
 
     testRuntime("junit5")
     processing {
