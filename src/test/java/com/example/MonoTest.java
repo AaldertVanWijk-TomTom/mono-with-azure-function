@@ -14,7 +14,7 @@ import jakarta.inject.Inject;
 @MicronautTest
 public class MonoTest {
     @Inject
-    @Client("/api/")
+    @Client("/")
     HttpClient client;
 
     @Test

@@ -41,8 +41,9 @@ java {
 
 graalvmNative.toolchainDetection = false
 micronaut {
+    runtime("netty")
 //    runtime("jetty")
-    runtime("azure_function")
+//    runtime("azure_function")
 
     testRuntime("junit5")
     processing {
